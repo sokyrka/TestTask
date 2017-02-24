@@ -14,14 +14,13 @@ import java.util.TreeMap;
 public class TextHandlerImpl implements TextHandler {
 
     @Override
-    public Map<String, Integer> getPerformedText(String words) {
-        StringTokenizer tokenizer = new StringTokenizer(words, " .,;-\r");
+    public Map<String, Integer> getModifiedText(String words) {
+        StringTokenizer tokenizer = new StringTokenizer(words, " .,;-@\r");
         Map<String, Integer> map = new TreeMap<>();
+        map.put(" Total count", tokenizer.countTokens());
 
         String word;
         Integer count;
-
-        System.out.println("Count: " + tokenizer.countTokens());
 
         while (tokenizer.hasMoreTokens()) {
             word = tokenizer.nextToken();
@@ -30,8 +29,6 @@ public class TextHandlerImpl implements TextHandler {
             count = (count == null) ? 1 : count + 1;
             map.put(word, count);
         }
-
-        System.out.println(map.toString());
 
         return map;
     }
